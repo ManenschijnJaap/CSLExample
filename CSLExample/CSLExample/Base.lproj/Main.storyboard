@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6mT-zE-jwH">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="Ddf-2x-B3v">
+            <objects>
+                <navigationController id="6mT-zE-jwH" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5Cm-FK-bY6">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="6ey-nq-DcI" kind="relationship" relationship="rootViewController" id="kh4-wB-zR7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IAI-cU-nzX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-480" y="145"/>
+        </scene>
+        <!--Breweries View Controller-->
+        <scene sceneID="Sii-vr-B8Q">
+            <objects>
+                <viewController id="6ey-nq-DcI" customClass="BreweriesViewController" customModule="CSLExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="R7b-M7-t74">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BSm-vF-Qbi">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="BSm-vF-Qbi" firstAttribute="top" secondItem="TOP-mj-uvh" secondAttribute="top" id="0G6-kk-YNB"/>
+                            <constraint firstItem="TOP-mj-uvh" firstAttribute="trailing" secondItem="BSm-vF-Qbi" secondAttribute="trailing" id="3oC-fk-fzm"/>
+                            <constraint firstItem="BSm-vF-Qbi" firstAttribute="leading" secondItem="TOP-mj-uvh" secondAttribute="leading" id="BRL-CY-MJ4"/>
+                            <constraint firstItem="TOP-mj-uvh" firstAttribute="bottom" secondItem="BSm-vF-Qbi" secondAttribute="bottom" id="YQn-5v-lYu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="TOP-mj-uvh"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="R6e-CN-naG"/>
+                    <connections>
+                        <outlet property="tableView" destination="BSm-vF-Qbi" id="dGg-sH-un4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FI9-hs-r9q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="406" y="140"/>
+        </scene>
+    </scenes>
+</document>
