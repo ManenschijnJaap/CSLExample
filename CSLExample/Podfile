@@ -1,0 +1,21 @@
+platform :ios, '11.0'
+
+target 'CSLExample' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+  
+  # Pods for CSLExample
+  
+  # Utilities
+  pod 'SwiftLint'
+  
+  # Networking
+  pod 'Alamofire', '~> 4'
+  pod 'AlamofireImage', '~> 3'
+  pod 'AlamofireObjectMapper', '~> 5.2'
+  pod 'PromiseKit/CorePromise', '~> 6.8'
+  
+  # Database
+  pod 'RealmSwift', '~> 3.16'
+  
+end
