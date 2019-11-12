@@ -66,6 +66,7 @@ extension BreweryDetailViewController {
         self.presenter?.removeFromDatabase()
     }
     
+    //We want to redraw for some reason. Since we still have the reference to the viewModel, lets just redraw everything
     @IBAction func redrawButtonPressed() {
         self.showViewModelInView()
     }
@@ -79,6 +80,7 @@ extension BreweryDetailViewController: BreweryDetailDisplayLogic {
         self.showViewModelInView()
     }
     
+    //Shows data of the model directly on the screen
     private func showViewModelInView() {
         
         self.nameLabel.text = viewModel?.name
@@ -89,4 +91,3 @@ extension BreweryDetailViewController: BreweryDetailDisplayLogic {
         self.countryLabel.text = viewModel?.country
     }
 }
-
