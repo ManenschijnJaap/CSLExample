@@ -18,12 +18,7 @@ class BreweriesRouter: BaseRouter, BreweriesRoutingLogic {
     // MARK: Routing
     
     func routeToDetail(id: Int) {
-        guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BreweryDetailViewController") as? BreweryDetailViewController else {
-            return
-        }
         
-        vc.presenter?.id = id
-        navigate(vc, .push)
     }
     
 }

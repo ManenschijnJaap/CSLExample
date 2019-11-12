@@ -8,15 +8,7 @@
 
 import UIKit
 
-protocol BreweryDetailDisplayLogic: class {
-    
-    func displayDetails(brewery: Brewery)
-}
-
 class BreweryDetailViewController: UIViewController {
-    
-    var presenter: (BreweryDetailBusinessLogic & BreweryDetailDatastore)?
-    var router: BreweriesRoutingLogic?
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var streetLabel: UILabel!
@@ -24,59 +16,30 @@ class BreweryDetailViewController: UIViewController {
     @IBOutlet weak var stateLabel: UILabel!
     @IBOutlet weak var countryLabel: UILabel!
     private var brewery: Brewery?
+    var id: Int?
     
     // MARK: Object lifecycle
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    // MARK: Setup
-    private func setup() {
-        
-        // default CSL setup
-        self.presenter = BreweryDetailPresenter()
-        self.presenter?.attachDisplayLogic(self)
-        self.router = BreweriesRouter(source: self)
-    }
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         loadDetails()
     }
-}
-
-// MARK: logic for calling the presenter
-extension BreweryDetailViewController {
     
     func loadDetails() {
-        
-        presenter?.loadDetails()
+        if let id = id, let brewery = BreweryManager.shared.getBrewery(id: id) {
+            self.brewery = brewery
+            self.showBreweryInView()
+        }
     }
     
     @IBAction func deleteButtonPressed() {
-        self.presenter?.removeFromDatabase()
+        if let id = id {
+            BreweryManager.shared.deleteBrewery(id: id)
+        }
     }
     
     //For some reason, we want to redraw everything. Since we still know all the data (by reference), lets just redraw it.
     @IBAction func redrawButtonPressed() {
-        self.showBreweryInView()
-    }
-}
-
-// MARK: Input --- Display something
-extension BreweryDetailViewController: BreweryDetailDisplayLogic {
-    
-    func displayDetails(brewery: Brewery) {
-        self.brewery = brewery
         self.showBreweryInView()
     }
     

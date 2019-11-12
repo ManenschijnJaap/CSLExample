@@ -7,44 +7,18 @@
 //
 
 import UIKit
-
-protocol BreweriesDisplayLogic: class {
-
-    func displayBreweries(breweries: [Brewery])
-    func showDetails(id: Int)
-}
+import PromiseKit
+import RealmSwift
 
 class BreweriesViewController: UIViewController {
-
-    var presenter: (BreweriesBusinessLogic & BreweriesDatastore)?
-    var router: BreweriesRoutingLogic?
-    private var breweries: [Brewery]?
+    
     @IBOutlet weak var tableView: UITableView!
-
+    private var breweries: Results<Brewery>?
+    
     // MARK: Object lifecycle
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-
-        super.init(coder: aDecoder)
-        setup()
-    }
-
-    // MARK: Setup
-    private func setup() {
-        
-        // default CSL setup
-        self.presenter = BreweriesPresenter()
-        self.presenter?.attachDisplayLogic(self)
-        self.router = BreweriesRouter(source: self)
-    }
-
+    
     override func viewDidLoad() {
-
+        
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -56,26 +30,17 @@ class BreweriesViewController: UIViewController {
         super.viewWillAppear(animated)
         loadBreweries()
     }
-}
-
-// MARK: logic for calling the presenter
-extension BreweriesViewController {
-
+    
     func loadBreweries() {
         
-        presenter?.loadBreweries()
-    }
-}
-
-// MARK: Input --- Display something
-extension BreweriesViewController: BreweriesDisplayLogic {
-    func displayBreweries(breweries: [Brewery]) {
-        self.breweries = breweries
-        self.tableView.reloadData()
-    }
-    
-    func showDetails(id: Int) {
-        self.router?.routeToDetail(id: id)
+        firstly {
+            BreweryManager.shared.fetchBreweries()
+        }.done {
+            self.breweries = BreweryManager.shared.getLocalBroweries()
+            self.tableView.reloadData()
+        }.catch { _ in
+            //could handle error here
+        }
     }
 }
 
@@ -95,7 +60,12 @@ extension BreweriesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if let brewery = self.breweries?[indexPath.row] {
-            self.presenter?.breweryClicked(id: brewery.id)
+            guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BreweryDetailViewController") as? BreweryDetailViewController else {
+                return
+            }
+            
+            vc.id = brewery.id
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }
