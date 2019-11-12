@@ -10,15 +10,15 @@ import UIKit
 
 protocol BreweriesDisplayLogic: class {
 
-    func displayBreweries(viewModel: BreweriesViewModel)
+    func displayBreweries(breweries: [Brewery])
     func showDetails(id: Int)
 }
 
 class BreweriesViewController: UIViewController {
 
-    var presenter:  (BreweriesBusinessLogic & BreweriesDatastore)?
+    var presenter: (BreweriesBusinessLogic & BreweriesDatastore)?
     var router: BreweriesRoutingLogic?
-    private var breweries: [BreweryViewModel]?
+    private var breweries: [Brewery]?
     @IBOutlet weak var tableView: UITableView!
 
     // MARK: Object lifecycle
@@ -69,8 +69,8 @@ extension BreweriesViewController {
 
 // MARK: Input --- Display something
 extension BreweriesViewController: BreweriesDisplayLogic {
-    func displayBreweries(viewModel: BreweriesViewModel) {
-        self.breweries = viewModel.breweries
+    func displayBreweries(breweries: [Brewery]) {
+        self.breweries = breweries
         self.tableView.reloadData()
     }
     
@@ -86,16 +86,16 @@ extension BreweriesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "breweryCell", for: indexPath)
-        if let viewModel = self.breweries?[indexPath.row] {
-            cell.textLabel?.text = viewModel.name
+        if let brewery = self.breweries?[indexPath.row] {
+            cell.textLabel?.text = brewery.name
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if let model = self.breweries?[indexPath.row] {
-            self.presenter?.breweryClicked(id: model.id)
+        if let brewery = self.breweries?[indexPath.row] {
+            self.presenter?.breweryClicked(id: brewery.id)
         }
     }
 }

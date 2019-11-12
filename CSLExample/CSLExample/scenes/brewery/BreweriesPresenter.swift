@@ -48,11 +48,7 @@ extension BreweriesPresenter: BreweriesBusinessLogic {
     
     private func showBreweries() {
         if let breweries = self.breweries, !breweries.isEmpty {
-            var models: [BreweryViewModel] = []
-            for model in breweries {
-                models.append(model.toBreweryViewModel())
-            }
-            self.displayLogic?.displayBreweries(viewModel: BreweriesViewModel(breweries: models))
+            self.displayLogic?.displayBreweries(breweries: Array(breweries))
         }
     }
     

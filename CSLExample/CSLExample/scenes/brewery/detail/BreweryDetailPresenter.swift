@@ -38,12 +38,14 @@ extension BreweryDetailPresenter: BreweryDetailBusinessLogic {
         self.displayLogic = logic
     }
     
+    //This will load the details from the local DB
     func loadDetails() {
         if let id = id, let brewery = BreweryManager.shared.getBrewery(id: id) {
-            self.displayLogic?.displayDetails(viewModel: brewery.toDetailViewModel())
+            self.displayLogic?.displayDetails(brewery: brewery)
         }
     }
     
+    //This will remove the loaded brewery from the local DB
     func removeFromDatabase() {
         if let id = id {
             BreweryManager.shared.deleteBrewery(id: id)

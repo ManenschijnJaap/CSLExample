@@ -10,12 +10,12 @@ import UIKit
 
 protocol BreweryDetailDisplayLogic: class {
     
-    func displayDetails(viewModel: BreweryDetailViewModel)
+    func displayDetails(brewery: Brewery)
 }
 
 class BreweryDetailViewController: UIViewController {
     
-    var presenter:  (BreweryDetailBusinessLogic & BreweryDetailDatastore)?
+    var presenter: (BreweryDetailBusinessLogic & BreweryDetailDatastore)?
     var router: BreweriesRoutingLogic?
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
@@ -23,7 +23,7 @@ class BreweryDetailViewController: UIViewController {
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var stateLabel: UILabel!
     @IBOutlet weak var countryLabel: UILabel!
-    private var viewModel: BreweryDetailViewModel?
+    private var brewery: Brewery?
     
     // MARK: Object lifecycle
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -66,27 +66,28 @@ extension BreweryDetailViewController {
         self.presenter?.removeFromDatabase()
     }
     
+    //For some reason, we want to redraw everything. Since we still know all the data (by reference), lets just redraw it.
     @IBAction func redrawButtonPressed() {
-        self.showViewModelInView()
+        self.showBreweryInView()
     }
 }
 
 // MARK: Input --- Display something
 extension BreweryDetailViewController: BreweryDetailDisplayLogic {
     
-    func displayDetails(viewModel: BreweryDetailViewModel) {
-        self.viewModel = viewModel
-        self.showViewModelInView()
+    func displayDetails(brewery: Brewery) {
+        self.brewery = brewery
+        self.showBreweryInView()
     }
     
-    private func showViewModelInView() {
+    //Reads from the model & shows it on screen
+    private func showBreweryInView() {
         
-        self.nameLabel.text = viewModel?.name
-        self.typeLabel.text = viewModel?.type
-        self.streetLabel.text = viewModel?.street
-        self.cityLabel.text = viewModel?.city
-        self.stateLabel.text = viewModel?.state
-        self.countryLabel.text = viewModel?.country
+        self.nameLabel.text = brewery?.name
+        self.typeLabel.text = brewery?.type
+        self.streetLabel.text = brewery?.street
+        self.cityLabel.text = brewery?.city
+        self.stateLabel.text = brewery?.state
+        self.countryLabel.text = brewery?.country
     }
 }
-
