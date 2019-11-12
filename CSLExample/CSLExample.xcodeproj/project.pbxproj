@@ -22,6 +22,9 @@
 		38935BEE2379F555006B7719 /* BreweriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38935BEB2379F555006B7719 /* BreweriesViewModel.swift */; };
 		38935BF02379F5E2006B7719 /* BreweriesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38935BEF2379F5E2006B7719 /* BreweriesRouter.swift */; };
 		38935BF22379F65E006B7719 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38935BF12379F65D006B7719 /* BaseRouter.swift */; };
+		38935BF8237AB1B3006B7719 /* BreweryDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38935BF5237AB1B3006B7719 /* BreweryDetailPresenter.swift */; };
+		38935BF9237AB1B3006B7719 /* BreweryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38935BF6237AB1B3006B7719 /* BreweryDetailViewController.swift */; };
+		38935BFA237AB1B3006B7719 /* BreweryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38935BF7237AB1B3006B7719 /* BreweryDetailViewModel.swift */; };
 		B6C1B570187F14057F5225E3 /* Pods_CSLExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 647F4C98FA18F7F782791A78 /* Pods_CSLExample.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +46,9 @@
 		38935BEB2379F555006B7719 /* BreweriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreweriesViewModel.swift; sourceTree = "<group>"; };
 		38935BEF2379F5E2006B7719 /* BreweriesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreweriesRouter.swift; sourceTree = "<group>"; };
 		38935BF12379F65D006B7719 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
+		38935BF5237AB1B3006B7719 /* BreweryDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreweryDetailPresenter.swift; sourceTree = "<group>"; };
+		38935BF6237AB1B3006B7719 /* BreweryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreweryDetailViewController.swift; sourceTree = "<group>"; };
+		38935BF7237AB1B3006B7719 /* BreweryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreweryDetailViewModel.swift; sourceTree = "<group>"; };
 		5EEAB4F639434F382A8B6C3A /* Pods-CSLExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSLExample.release.xcconfig"; path = "Target Support Files/Pods-CSLExample/Pods-CSLExample.release.xcconfig"; sourceTree = "<group>"; };
 		647F4C98FA18F7F782791A78 /* Pods_CSLExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CSLExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		86624DC505AC3100DA156A64 /* Pods-CSLExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSLExample.debug.xcconfig"; path = "Target Support Files/Pods-CSLExample/Pods-CSLExample.debug.xcconfig"; sourceTree = "<group>"; };
@@ -108,10 +114,7 @@
 		38935BDA2379EBE7006B7719 /* scenes */ = {
 			isa = PBXGroup;
 			children = (
-				38935BE92379F555006B7719 /* BreweriesPresenter.swift */,
-				38935BEA2379F555006B7719 /* BreweriesViewController.swift */,
-				38935BEB2379F555006B7719 /* BreweriesViewModel.swift */,
-				38935BEF2379F5E2006B7719 /* BreweriesRouter.swift */,
+				38935BF4237AB11F006B7719 /* brewery */,
 			);
 			path = scenes;
 			sourceTree = "<group>";
@@ -147,6 +150,28 @@
 				38935BE72379F4E2006B7719 /* RealmExtensions.swift */,
 			);
 			path = extensions;
+			sourceTree = "<group>";
+		};
+		38935BF3237AB112006B7719 /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				38935BF5237AB1B3006B7719 /* BreweryDetailPresenter.swift */,
+				38935BF6237AB1B3006B7719 /* BreweryDetailViewController.swift */,
+				38935BF7237AB1B3006B7719 /* BreweryDetailViewModel.swift */,
+			);
+			path = detail;
+			sourceTree = "<group>";
+		};
+		38935BF4237AB11F006B7719 /* brewery */ = {
+			isa = PBXGroup;
+			children = (
+				38935BF3237AB112006B7719 /* detail */,
+				38935BE92379F555006B7719 /* BreweriesPresenter.swift */,
+				38935BEA2379F555006B7719 /* BreweriesViewController.swift */,
+				38935BEB2379F555006B7719 /* BreweriesViewModel.swift */,
+				38935BEF2379F5E2006B7719 /* BreweriesRouter.swift */,
+			);
+			path = brewery;
 			sourceTree = "<group>";
 		};
 		D5EF6ED6CA891B9463DDC027 /* Pods */ = {
@@ -295,14 +320,17 @@
 			files = (
 				38935BEE2379F555006B7719 /* BreweriesViewModel.swift in Sources */,
 				38935BE22379F1C3006B7719 /* NetworkRequestFailedError.swift in Sources */,
+				38935BFA237AB1B3006B7719 /* BreweryDetailViewModel.swift in Sources */,
 				38935BEC2379F555006B7719 /* BreweriesPresenter.swift in Sources */,
 				38935BE82379F4E2006B7719 /* RealmExtensions.swift in Sources */,
 				38935BE02379F163006B7719 /* NetworkManager.swift in Sources */,
 				38935BDD2379F084006B7719 /* BreweryManager.swift in Sources */,
+				38935BF8237AB1B3006B7719 /* BreweryDetailPresenter.swift in Sources */,
 				38935BE52379F1F2006B7719 /* Brewery.swift in Sources */,
 				38935BF22379F65E006B7719 /* BaseRouter.swift in Sources */,
 				38935BC42379E933006B7719 /* AppDelegate.swift in Sources */,
 				38935BED2379F555006B7719 /* BreweriesViewController.swift in Sources */,
+				38935BF9237AB1B3006B7719 /* BreweryDetailViewController.swift in Sources */,
 				38935BF02379F5E2006B7719 /* BreweriesRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

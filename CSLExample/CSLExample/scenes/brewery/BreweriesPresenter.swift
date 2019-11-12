@@ -14,6 +14,7 @@ protocol BreweriesBusinessLogic {
 
     func attachDisplayLogic(_ logic: BreweriesDisplayLogic)
     func loadBreweries()
+    func breweryClicked(id: Int?)
 }
 
 protocol BreweriesDatastore {
@@ -52,6 +53,12 @@ extension BreweriesPresenter: BreweriesBusinessLogic {
                 models.append(model.toBreweryViewModel())
             }
             self.displayLogic?.displayBreweries(viewModel: BreweriesViewModel(breweries: models))
+        }
+    }
+    
+    func breweryClicked(id: Int?) {
+        if let id = id {
+            self.displayLogic?.showDetails(id: id)
         }
     }
 }

@@ -22,6 +22,21 @@ class BreweryManager {
         return nil
     }
     
+    func getBrewery(id: Int) -> Brewery? {
+        return Realm.safeInit()?.objects(Brewery.self).filter(NSPredicate(format: "id = %d", id)).first
+    }
+    
+    func deleteBrewery(id: Int) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.delete(realm.objects(Brewery.self).filter(NSPredicate(format: "id = %d", id)))
+            }
+        } catch _ {
+            //use error
+        }
+    }
+    
     func fetchBreweries() -> Promise<Void> {
         return Promise<Void> { seal in
             guard let url = URL(string: "https://api.openbrewerydb.org/breweries") else {

@@ -11,6 +11,7 @@ import UIKit
 protocol BreweriesDisplayLogic: class {
 
     func displayBreweries(viewModel: BreweriesViewModel)
+    func showDetails(id: Int)
 }
 
 class BreweriesViewController: UIViewController {
@@ -49,6 +50,10 @@ class BreweriesViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "breweryCell")
         self.title = "Breweries"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         loadBreweries()
     }
 }
@@ -68,6 +73,10 @@ extension BreweriesViewController: BreweriesDisplayLogic {
         self.breweries = viewModel.breweries
         self.tableView.reloadData()
     }
+    
+    func showDetails(id: Int) {
+        self.router?.routeToDetail(id: id)
+    }
 }
 
 extension BreweriesViewController: UITableViewDelegate, UITableViewDataSource {
@@ -85,5 +94,8 @@ extension BreweriesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if let model = self.breweries?[indexPath.row] {
+            self.presenter?.breweryClicked(id: model.id)
+        }
     }
 }
