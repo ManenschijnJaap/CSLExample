@@ -3,8 +3,9 @@
 Simple example of why you should use Clean Swift Lite, in particular with a ViewModel implementation.
 
 There's 3 branches:
-csl: Default branch, has the implementation the way it should be
-no_viewmodel: Has a CSL implementation, but lacking ViewModels
+
+csl: Default branch, has the implementation the way it should be\
+no_viewmodel: Has a CSL implementation, but lacking ViewModels\
 no_csl: Has the 'standard' Apple MVC implementation. Also, no ViewModels
 
 # Why CSL?
